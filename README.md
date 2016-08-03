@@ -35,8 +35,8 @@ incapsulates one or more **Controllers** and **Filters**.
 
 An **handler** consumes a **Payload** and produce an **Answer**, according to the business logic.
 
-**Payloads** are user defined POJO, which extracts parameters from the http request.
-**Answer**s are simple object with a status code and a map of key-values to return.
+**Payloads** are user defined POJO, which extracts parameters from http requests.
+**Answers** are simple objects with a status code and a map of key-values to return.
 
 **Filters** are very similar to handlers, but they are executed _before_ or _after_ each request/response.
 
@@ -51,3 +51,51 @@ public static void main(String[] args) throws IOException {
 }
 ```
 
+The EchoApp is:
+``` java
+public class EchoApp extends JWebApp {
+    @Override
+    public List<? extends JWebController> getControllers() {
+        return Arrays.asList(new JWebController() {
+            public HttpMethod getMethod() {
+                return HttpMethod.get;
+            }
+
+            public JWebHandler getHandler() {
+                return new GetEchoHandler();
+            }
+
+            public String getPath() {
+                return "/api/echo";
+            }
+        });
+    }
+
+    public static class EchoPayload implements Payload {
+        private String message;
+
+        public EchoPayload() {
+
+        }
+
+        public void init(Request req) {
+            this.message = req.queryParams("message");
+        }
+
+        public String getMessage() {
+            return message;
+        }
+    }
+
+    public static class GetEchoHandler extends JWebHandler<EchoPayload> {
+        public GetEchoHandler() {
+            super(EchoPayload.class);
+        }
+
+        @Override
+        public Answer process(EchoPayload ep) {
+            return new SuccessAnswer("message", "Echo: " + ep.getMessage());
+        }
+    }
+}
+```
