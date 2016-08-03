@@ -1,9 +1,10 @@
-package it.besil.web.jweb;
+package it.besil.jweb.server;
 
-import it.besil.web.app.JWebApp;
-import it.besil.web.app.handlers.JWebHandler;
-import it.besil.web.app.resources.HttpMethod;
-import it.besil.web.app.resources.JWebResource;
+import it.besil.jweb.app.JWebApp;
+import it.besil.jweb.app.handlers.JWebHandler;
+import it.besil.jweb.app.resources.HttpMethod;
+import it.besil.jweb.app.resources.JWebResource;
+import it.besil.jweb.server.conf.JWebConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Route;
@@ -17,12 +18,13 @@ import java.util.List;
 /**
  * Created by besil on 09/06/2016.
  */
-public class JWeb {
+public class JWebServer {
     private final Service http;
-    private Logger log = LoggerFactory.getLogger(JWeb.class);
+    private Logger log = LoggerFactory.getLogger(JWebServer.class);
     private List<JWebApp> apps;
 
-    public JWeb() {
+    public JWebServer(JWebConfiguration conf) {
+        log.info("Using conf\n{}", conf.toString());
         this.http = Service.ignite();
         this.apps = new LinkedList<>();
     }

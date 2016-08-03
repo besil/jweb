@@ -1,9 +1,9 @@
-package it.besil.web.app.handlers;
+package it.besil.jweb.app.handlers;
 
 import com.google.gson.Gson;
-import it.besil.web.app.answer.Answer;
-import it.besil.web.app.answer.ErrorAnswer;
-import it.besil.web.app.payloads.Payload;
+import it.besil.jweb.app.answer.ErrorAnswer;
+import it.besil.jweb.app.answer.Answer;
+import it.besil.jweb.app.payloads.Payload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Request;

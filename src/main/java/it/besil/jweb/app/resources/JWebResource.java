@@ -1,6 +1,6 @@
-package it.besil.web.app.resources;
+package it.besil.jweb.app.resources;
 
-import it.besil.web.app.handlers.JWebHandler;
+import it.besil.jweb.app.handlers.JWebHandler;
 
 /**
  * Created by besil on 03/08/2016.

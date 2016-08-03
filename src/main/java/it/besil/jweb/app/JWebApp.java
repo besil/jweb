@@ -1,6 +1,6 @@
-package it.besil.web.app;
+package it.besil.jweb.app;
 
-import it.besil.web.app.resources.JWebResource;
+import it.besil.jweb.app.resources.JWebResource;
 
 import java.util.List;
 
