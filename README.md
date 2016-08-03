@@ -48,6 +48,7 @@ public static void main(String[] args) throws IOException {
     JWebConfiguration conf = new JWebConfiguration();
     JWebServer jweb = new JWebServer(conf);
     jweb.addApp(new EchoApp());
+    // You can add here as many apps as you want
 }
 ```
 
