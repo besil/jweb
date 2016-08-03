@@ -85,7 +85,8 @@ public class EchoApp extends JWebApp {
     @Override
         public List<? extends JWebController> getControllers() {
             // Every app can be made by different controllers.
-            // Each controller must specify the method, the path where to bind and the handler for that requests
+            // Each controller must specify
+            // the method, the path where to bind and the handler
             return Arrays.asList(new JWebController() {
                 public HttpMethod getMethod() {
                     return HttpMethod.get;
@@ -118,7 +119,8 @@ public class EchoTest extends AbstractBehaviouralTest {
         HttpResponse<JsonNode> resp = Unirest.get(getUrl("/api/echo"))
                 .queryString("message", "ciao")
                 .asJson();
-        Assert.assertEquals("Echo: ciao", resp.getBody().getObject().getString("message"));
+        Assert.assertEquals("Echo: ciao",
+            resp.getBody().getObject().getString("message"));
     }
 }
 ```
