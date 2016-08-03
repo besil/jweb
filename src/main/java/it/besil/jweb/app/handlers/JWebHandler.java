@@ -31,12 +31,13 @@ public abstract class JWebHandler<V extends Payload> implements Route {
             p = payloadClass.newInstance();
             Method payloadInit = payloadClass.getMethod("init", Request.class); //, Response.class);
             payloadInit.invoke(p, new Object[]{request});
+
         } catch (Exception e) {
             e.printStackTrace();
             a = new ErrorAnswer(300, "Error while init payload");
         }
 
-        if (a == null | p == null) {
+        if (a == null && p != null) {
             try {
                 Method m = getClass().getMethod("process", new Class[]{p.getClass()});
                 m.setAccessible(true);
@@ -49,7 +50,6 @@ public abstract class JWebHandler<V extends Payload> implements Route {
 
         response.type("application/json");
         return new Gson().toJson(a.getBindings());
-
     }
 
     public abstract Answer process(V payload);

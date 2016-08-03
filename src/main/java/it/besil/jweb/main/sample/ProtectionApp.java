@@ -1,11 +1,13 @@
 package it.besil.jweb.main.sample;
 
 import it.besil.jweb.app.JWebApp;
+import it.besil.jweb.app.answer.Answer;
+import it.besil.jweb.app.answer.ErrorAnswer;
+import it.besil.jweb.app.answer.SuccessAnswer;
 import it.besil.jweb.app.filter.FilterType;
 import it.besil.jweb.app.filter.JWebFilter;
 import it.besil.jweb.app.filter.JWebFilterHandler;
 import spark.Request;
-import spark.Response;
 import spark.Service;
 
 import java.util.Arrays;
@@ -21,11 +23,12 @@ public class ProtectionApp extends JWebApp {
         return Arrays.asList(new JWebFilter() {
             @Override
             public JWebFilterHandler getHandler(Service http) {
-                return new JWebFilterHandler() {
+                return new JWebFilterHandler(http) {
                     @Override
-                    public void handle(Request request, Response response) throws Exception {
+                    public Answer process(Request request) {
                         if (!request.queryParams().contains("ciao"))
-                            http.halt("stooooop. Insert ciao query param");
+                            return new ErrorAnswer("Stoooop. Insert ciao query param");
+                        return new SuccessAnswer("message", "ok");
                     }
                 };
             }

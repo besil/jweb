@@ -16,7 +16,7 @@ public class JWebMain {
         JWebServer jweb = new JWebServer(new JWebConfiguration());
 
         jweb.addApp(new ProtectionApp());
-        jweb.addApp(new GoodMorningApp());
         jweb.addApp(new HelloApp());
+        jweb.addApp(new GoodMorningApp());
     }
 }
