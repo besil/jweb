@@ -10,7 +10,6 @@
 
     <properties>
         <spark.version>LATEST</spark.version>
-        <jinjava.version>LATEST</jinjava.version>
         <guava.version>LATEST</guava.version>
         <slf4j.version>LATEST</slf4j.version>
         <gson.version>LATEST</gson.version>
@@ -59,11 +58,6 @@
             <artifactId>h2</artifactId>
             <version>1.4.191</version>
         </dependency>
-        <dependency>
-            <groupId>org.orbisgis</groupId>
-            <artifactId>h2spatial-ext</artifactId>
-            <version>1.2.3</version>
-        </dependency>
         <!-- Slf4j loggin -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -74,12 +68,6 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.easymock</groupId>
-            <artifactId>easymock</artifactId>
-            <version>3.4</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
