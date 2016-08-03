@@ -83,6 +83,8 @@ public class EchoApp extends JWebApp {
 
     @Override
         public List<? extends JWebController> getControllers() {
+            // Every app can be made by different controllers.
+            // Each controller must specify the method, the path where to bind and the handler for that requests
             return Arrays.asList(new JWebController() {
                 public HttpMethod getMethod() {
                     return HttpMethod.get;
