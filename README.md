@@ -54,23 +54,6 @@ public static void main(String[] args) throws IOException {
 The EchoApp is:
 ``` java
 public class EchoApp extends JWebApp {
-    @Override
-    public List<? extends JWebController> getControllers() {
-        return Arrays.asList(new JWebController() {
-            public HttpMethod getMethod() {
-                return HttpMethod.get;
-            }
-
-            public JWebHandler getHandler() {
-                return new GetEchoHandler();
-            }
-
-            public String getPath() {
-                return "/api/echo";
-            }
-        });
-    }
-
     public static class EchoPayload implements Payload {
         private String message;
 
@@ -97,5 +80,22 @@ public class EchoApp extends JWebApp {
             return new SuccessAnswer("message", "Echo: " + ep.getMessage());
         }
     }
+
+    @Override
+        public List<? extends JWebController> getControllers() {
+            return Arrays.asList(new JWebController() {
+                public HttpMethod getMethod() {
+                    return HttpMethod.get;
+                }
+
+                public JWebHandler getHandler() {
+                    return new GetEchoHandler();
+                }
+
+                public String getPath() {
+                    return "/api/echo";
+                }
+            });
+        }
 }
 ```
