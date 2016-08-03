@@ -13,7 +13,6 @@ import spark.Service;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -22,7 +21,6 @@ import java.util.List;
 public class JWebServer {
     private final Service http;
     private Logger log;
-    private List<JWebApp> apps;
 
     public JWebServer(JWebConfiguration conf) {
         if (conf.debugMode())
@@ -30,18 +28,17 @@ public class JWebServer {
         log = LoggerFactory.getLogger(JWebServer.class);
         log.debug("Using conf\n{}", conf.toString());
         this.http = Service.ignite();
-        this.apps = new LinkedList<>();
+        this.http.ipAddress("0.0.0.0");
+
+//        http.get("/", (req, res) -> ImmutableMap.of("status", "UP"));
     }
 
-    public void start() {
-        for (JWebApp app : apps) {
-            log.debug("Installing app {}", app.getClass().getName());
-            List<? extends JWebResource> resources = app.getResources();
-            for (JWebResource resource : resources) {
-                this.install(resource);
-            }
+    public void addApp(JWebApp app) {
+        log.debug("Installing app {}", app.getClass().getName());
+        List<? extends JWebResource> resources = app.getResources();
+        for (JWebResource resource : resources) {
+            this.install(resource);
         }
-        log.info("Server started");
     }
 
     private void install(JWebResource resource) {
@@ -58,7 +55,8 @@ public class JWebServer {
 
     }
 
-    public void addApp(JWebApp app) {
-        this.apps.add(app);
+    public void stop() {
+        this.http.stop();
     }
+
 }

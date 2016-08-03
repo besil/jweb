@@ -1,16 +1,15 @@
-package it.besil.web.jweb;
+package it.besil.jweb.testing;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import it.besil.jweb.app.JWebApp;
 import it.besil.jweb.server.JWebServer;
 import it.besil.jweb.server.conf.JWebConfiguration;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
@@ -18,7 +17,6 @@ import java.io.IOException;
  * Created by besil on 20/07/2016.
  */
 public abstract class AbstractBehaviouralTest {
-    private final Logger log = LoggerFactory.getLogger(AbstractBehaviouralTest.class);
     private static JWebServer server;
     private static JWebConfiguration conf;
 //    private MyCardsClient restClient;
@@ -29,8 +27,12 @@ public abstract class AbstractBehaviouralTest {
         if (server == null) {
             conf = new JWebConfiguration();
             server = new JWebServer(conf);
-            server.start();
+//            server.start();
         }
+    }
+
+    protected String getUrl(String path) {
+        return "http://localhost:" + conf.getServerPort() + path;
     }
 
 //    @AfterClass
@@ -59,5 +61,11 @@ public abstract class AbstractBehaviouralTest {
         JsonParser jp = new JsonParser();
         JsonElement je = jp.parse(json);
         return gson.toJson(je);
+    }
+
+    protected void addApp(JWebApp app) {
+//        server.stop();
+        server.addApp(app);
+//        server.start();
     }
 }
