@@ -9,7 +9,7 @@ similarly to Django or other common web frameworks.
 
 ## Installation
 Please clone the repo and include it as maven dependency
-```
+``` xml
 <dependency>
     <groupId>it.besil.web</groupId>
     <artifactId>jweb</artifactId>
