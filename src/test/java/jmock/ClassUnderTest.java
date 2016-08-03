@@ -1,4 +1,4 @@
-package example;
+package jmock;
 
 /**
  * Created by besil on 09/06/2016.

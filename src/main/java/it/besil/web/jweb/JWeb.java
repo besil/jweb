@@ -30,7 +30,7 @@ public class JWeb {
     public void start() {
         for (JWebApp app : apps) {
             log.debug("Installing app {}", app.getClass().getName());
-            List<JWebResource> resources = app.getResources();
+            List<? extends JWebResource> resources = app.getResources();
             for (JWebResource resource : resources) {
                 this.install(resource);
             }
@@ -51,7 +51,7 @@ public class JWeb {
 
     }
 
-    public void addResource(JWebApp app) {
+    public void addApp(JWebApp app) {
         this.apps.add(app);
     }
 }

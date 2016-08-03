@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Created by besil on 01/05/2016.
  */
-public class Answer {
+public abstract class Answer {
     private final int status;
     private final Map<String, Object> bindings;
 

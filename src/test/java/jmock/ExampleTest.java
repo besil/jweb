@@ -1,4 +1,4 @@
-package example;
+package jmock;
 
 import org.easymock.EasyMockRule;
 import org.easymock.EasyMockSupport;

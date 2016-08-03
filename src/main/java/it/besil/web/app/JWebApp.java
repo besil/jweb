@@ -9,5 +9,5 @@ import java.util.List;
  */
 public abstract class JWebApp {
 
-    public abstract List<JWebResource> getResources();
+    public abstract List<? extends JWebResource> getResources();
 }
