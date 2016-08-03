@@ -1,8 +1,8 @@
 package it.besil.jweb.app.handlers;
 
 import com.google.gson.Gson;
-import it.besil.jweb.app.answer.ErrorAnswer;
 import it.besil.jweb.app.answer.Answer;
+import it.besil.jweb.app.answer.ErrorAnswer;
 import it.besil.jweb.app.payloads.Payload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +39,7 @@ public abstract class JWebHandler<V extends Payload> implements Route {
         if (a == null | p == null) {
             try {
                 Method m = getClass().getMethod("process", new Class[]{p.getClass()});
-//            m.setAccessible(true);
+                m.setAccessible(true);
                 a = (Answer) m.invoke(this, new Object[]{p});
             } catch (Exception e) {
                 e.printStackTrace();

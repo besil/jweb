@@ -1,7 +1,9 @@
 package it.besil.jweb.app;
 
-import it.besil.jweb.app.resources.JWebResource;
+import it.besil.jweb.app.filter.JWebFilter;
+import it.besil.jweb.app.resources.JWebController;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -9,5 +11,11 @@ import java.util.List;
  */
 public abstract class JWebApp {
 
-    public abstract List<? extends JWebResource> getResources();
+    public List<? extends JWebController> getControllers() {
+        return Arrays.asList();
+    }
+
+    public List<? extends JWebFilter> getFilters() {
+        return Arrays.asList();
+    }
 }
