@@ -33,7 +33,14 @@ incapsulates one or more **Controllers** and **Filters**.
 
 3. A _handler_, which contains the business logic associated to the specific resource for that method
 
+An **handler** consumes a **Payload** and produce an **Answer**, according to the business logic.
 
+**Payloads** are user defined POJO, which extracts parameters from the http request.
+**Answer**s are simple object with a status code and a map of key-values to return.
+
+**Filters** are very similar to handlers, but they are executed _before_ or _after_ each request/response.
+
+Enough reading, let's see some code
 
 This is your main:
 ``` java
