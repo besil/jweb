@@ -51,7 +51,7 @@ public static void main(String[] args) throws IOException {
 }
 ```
 
-The EchoApp is:
+The EchoApp is (about 60 lines of code, 3 classes):
 ``` java
 public class EchoApp extends JWebApp {
     public static class EchoPayload implements Payload {
