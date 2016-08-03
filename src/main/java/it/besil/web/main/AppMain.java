@@ -1,5 +1,6 @@
 package it.besil.web.main;
 
+import it.besil.web.app.sample.EchoApp;
 import it.besil.web.app.sample.HelloWorldApp;
 import it.besil.web.jweb.JWeb;
 
@@ -11,7 +12,7 @@ public class AppMain {
         JWeb jweb = new JWeb();
 
         jweb.addResource(new HelloWorldApp());
-//        jweb.addResource(new EchoApp());
+        jweb.addResource(new EchoApp());
 
         jweb.start();
     }

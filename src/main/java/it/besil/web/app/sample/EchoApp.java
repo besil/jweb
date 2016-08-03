@@ -7,8 +7,6 @@ import it.besil.web.app.handlers.JWebHandler;
 import it.besil.web.app.payloads.Payload;
 import it.besil.web.app.resources.HttpMethod;
 import it.besil.web.app.resources.JWebResource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import spark.Request;
 
 import java.util.Arrays;
@@ -29,7 +27,7 @@ public class EchoApp extends JWebApp {
 
             @Override
             public JWebHandler getHandler() {
-                return null;
+                return new GetEchoHandler();
             }
 
             @Override
@@ -39,8 +37,12 @@ public class EchoApp extends JWebApp {
         });
     }
 
-    public class EchoPayload implements Payload {
+    public static class EchoPayload implements Payload {
         private String message;
+
+        public EchoPayload() {
+
+        }
 
         @Override
         public void init(Request req) {
@@ -52,16 +54,15 @@ public class EchoApp extends JWebApp {
         }
     }
 
-    public class GetEchoHandler extends JWebHandler<EchoPayload> {
-        private Logger log = LoggerFactory.getLogger(GetEchoHandler.class);
+    public static class GetEchoHandler extends JWebHandler<EchoPayload> {
+//        private Logger log = LoggerFactory.getLogger(GetEchoHandler.class);
 
-        public GetEchoHandler(Class<EchoPayload> payloadClass) {
-            super(payloadClass);
+        public GetEchoHandler() {
+            super(EchoPayload.class);
         }
 
         @Override
         public Answer process(EchoPayload ep) {
-            log.info("Handling payload");
             return new SuccessAnswer("message", "Echo: " + ep.getMessage());
         }
     }

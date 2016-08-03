@@ -26,16 +26,17 @@ public abstract class JWebHandler<V extends Payload> implements Route {
     @Override
     public final Object handle(Request request, Response response) throws Exception {
         Answer a = null;
-        Payload p = payloadClass.newInstance();
+        Payload p = null;
         try {
-            Method payloadInit = payloadClass.getMethod("init", Request.class, Response.class);
-            payloadInit.invoke(p, new Object[]{request, response});
+            p = payloadClass.newInstance();
+            Method payloadInit = payloadClass.getMethod("init", Request.class); //, Response.class);
+            payloadInit.invoke(p, new Object[]{request});
         } catch (Exception e) {
             e.printStackTrace();
             a = new ErrorAnswer(300, "Error while init payload");
         }
 
-        if (a == null) {
+        if (a == null | p == null) {
             try {
                 Method m = getClass().getMethod("process", new Class[]{p.getClass()});
 //            m.setAccessible(true);

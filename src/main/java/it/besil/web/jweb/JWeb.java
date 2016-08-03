@@ -4,6 +4,8 @@ import it.besil.web.app.JWebApp;
 import it.besil.web.app.handlers.JWebHandler;
 import it.besil.web.app.resources.HttpMethod;
 import it.besil.web.app.resources.JWebResource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.Route;
 import spark.Service;
 
@@ -17,6 +19,7 @@ import java.util.List;
  */
 public class JWeb {
     private final Service http;
+    private Logger log = LoggerFactory.getLogger(JWeb.class);
     private List<JWebApp> apps;
 
     public JWeb() {
@@ -26,6 +29,7 @@ public class JWeb {
 
     public void start() {
         for (JWebApp app : apps) {
+            log.debug("Installing app {}", app.getClass().getName());
             List<JWebResource> resources = app.getResources();
             for (JWebResource resource : resources) {
                 this.install(resource);
