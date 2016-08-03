@@ -101,3 +101,23 @@ public class EchoApp extends JWebApp {
         }
 }
 ```
+
+Run it, and open [localhost](http://localhost:4567/api/echo?message=hello). You will see your message echoed back.
+
+About **testing**, I found useful testing web services like this:
+``` java
+public class EchoTest extends AbstractBehaviouralTest {
+    @Before
+    public void init() {
+        this.addApp(new EchoApp());
+    }
+
+    @Test
+    public void simpleTest() throws UnirestException {
+        HttpResponse<JsonNode> resp = Unirest.get(getUrl("/api/echo"))
+                .queryString("message", "ciao")
+                .asJson();
+        Assert.assertEquals("Echo: ciao", resp.getBody().getObject().getString("message"));
+    }
+}
+```
