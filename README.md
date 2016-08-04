@@ -97,14 +97,14 @@ public class EchoApp extends JWebApp {
                 }
 
                 public String getPath() {
-                    return "/api/echo";
+                    return "/echo";
                 }
             });
         }
 }
 ```
 
-Run it, and open [localhost](http://localhost:4567/api/echo?message=hello). You will see your message echoed back.
+Run it, and open [localhost](http://localhost:4567/echo?message=hello). You will see your message echoed back.
 
 About **testing**, I found useful testing web services like this:
 ``` java
@@ -116,7 +116,7 @@ public class EchoTest extends AbstractBehaviouralTest {
 
     @Test
     public void simpleTest() throws UnirestException {
-        HttpResponse<JsonNode> resp = Unirest.get(getUrl("/api/echo"))
+        HttpResponse<JsonNode> resp = Unirest.get(getUrl("/echo"))
                 .queryString("message", "ciao")
                 .asJson();
         Assert.assertEquals("Echo: ciao",
