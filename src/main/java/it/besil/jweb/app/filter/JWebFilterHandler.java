@@ -24,9 +24,9 @@ public abstract class JWebFilterHandler implements Filter {
     public final void handle(final Request request, final Response response) throws Exception {
         Answer a;
         try {
-            Method m = getClass().getMethod("process", Request.class);
+            Method m = getClass().getMethod("process", Request.class, Response.class);
             m.setAccessible(true);
-            a = (Answer) m.invoke(this, request);
+            a = (Answer) m.invoke(this, request, response);
         } catch (Exception e) {
             e.printStackTrace();
             a = new ErrorAnswer(300, "Error while processing payload");
@@ -39,5 +39,5 @@ public abstract class JWebFilterHandler implements Filter {
         }
     }
 
-    public abstract Answer process(Request request);
+    public abstract Answer process(Request request, Response response);
 }
