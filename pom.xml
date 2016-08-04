@@ -10,6 +10,7 @@
 
     <properties>
         <spark.version>LATEST</spark.version>
+        <jinjava.version>LATEST</jinjava.version>
         <guava.version>LATEST</guava.version>
         <slf4j.version>LATEST</slf4j.version>
         <gson.version>LATEST</gson.version>
@@ -37,11 +38,11 @@
             <artifactId>spark-core</artifactId>
             <version>${spark.version}</version>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>com.hubspot.jinjava</groupId>-->
-        <!--<artifactId>jinjava</artifactId>-->
-        <!--<version>${jinjava.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.hubspot.jinjava</groupId>
+            <artifactId>jinjava</artifactId>
+            <version>${jinjava.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
