@@ -10,6 +10,8 @@ import it.besil.jweb.app.answer.SuccessAnswer;
 import it.besil.jweb.app.filter.FilterType;
 import it.besil.jweb.app.filter.JWebFilter;
 import it.besil.jweb.app.filter.JWebFilterHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
 import spark.Service;
@@ -25,9 +27,12 @@ import java.util.stream.Collectors;
  * Created by besil on 04/08/2016.
  */
 public class DynamicContentApp extends JWebApp {
+    private static Logger log = LoggerFactory.getLogger(DynamicContentApp.class);
+    private final String temtemplateMappingFile;
     private Map<String, String> route2template;
 
     public DynamicContentApp(String templateMappingFile) throws IOException {
+        this.temtemplateMappingFile = templateMappingFile;
         String mappings = Resources.toString(Resources.getResource(templateMappingFile), Charsets.UTF_8);
 
         route2template = Arrays.asList(mappings.split("\n"))
@@ -68,8 +73,15 @@ public class DynamicContentApp extends JWebApp {
                             response.type("text/html");
                             HashMap<String, Object> bindings = new Gson().fromJson(response.body(), HashMap.class);
                             String template = route2template.get(request.pathInfo());
-                            String content = render(template, bindings);
-                            response.body(content);
+                            if (template != null) {
+                                String content = render(template, bindings);
+                                response.body(content);
+                            } else {
+                                log.info("No template defined for {}. " +
+                                        "Check your {} file in resources. " +
+                                        "Switching to json response", request.pathInfo(), temtemplateMappingFile);
+                                response.type("application/json");
+                            }
                         } else {
                             response.type("application/json");
                         }
