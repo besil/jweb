@@ -9,14 +9,7 @@ The framework aims to be a library with support for common funcionalities
 similarly to Django or other common web frameworks.
 
 ## Installation
-Please clone the repo and include it as maven dependency
-``` xml
-<dependency>
-    <groupId>it.besil.web</groupId>
-    <artifactId>jweb</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
+Grab the repo as [maven dependency](https://jitpack.io/#besil/jweb/v1.0.0)
 
 ## Examples
 
