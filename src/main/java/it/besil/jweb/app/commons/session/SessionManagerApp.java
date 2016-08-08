@@ -25,11 +25,10 @@ import java.util.List;
 public class SessionManagerApp extends JWebApp {
     private static final Logger log = LoggerFactory.getLogger(SessionManagerApp.class);
     private final String path2lock;
-    private final JWebConfiguration conf;
 
     public SessionManagerApp(JWebConfiguration conf, String path2lock) {
+        super(conf);
         this.path2lock = path2lock;
-        this.conf = conf;
     }
 
     @Override
@@ -41,7 +40,7 @@ public class SessionManagerApp extends JWebApp {
                     @Override
                     public Answer process(Request request, Response response) {
                         try {
-                            SessionManager sm = new SessionManager(conf);
+                            SessionManager sm = new SessionManager(getJWebConf());
                             UserSessionBean usb = sm.getSession(request);
                             Date currentTime = new Date();
                             Date expirationTime = usb.getExpirationTime();

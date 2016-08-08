@@ -10,6 +10,7 @@ import it.besil.jweb.app.answer.SuccessAnswer;
 import it.besil.jweb.app.filter.FilterType;
 import it.besil.jweb.app.filter.JWebFilter;
 import it.besil.jweb.app.filter.JWebFilterHandler;
+import it.besil.jweb.server.conf.JWebConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Request;
@@ -31,7 +32,8 @@ public class DynamicContentApp extends JWebApp {
     private final String temtemplateMappingFile;
     private Map<String, String> route2template;
 
-    public DynamicContentApp(String templateMappingFile) throws IOException {
+    public DynamicContentApp(JWebConfiguration jwebconf, String templateMappingFile) throws IOException {
+        super(jwebconf);
         this.temtemplateMappingFile = templateMappingFile;
         String mappings = Resources.toString(Resources.getResource(templateMappingFile), Charsets.UTF_8);
 
