@@ -24,10 +24,13 @@ public abstract class AbstractBehaviouralTest {
         }
     }
 
+    public static JWebConfiguration getJWebConf() {
+        return conf;
+    }
+
     protected String getUrl(String path) {
         return "http://localhost:" + conf.getServerPort() + path;
     }
-
 
     protected String prettify(String json) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();

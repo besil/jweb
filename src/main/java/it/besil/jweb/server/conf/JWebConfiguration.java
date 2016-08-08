@@ -68,4 +68,8 @@ public class JWebConfiguration extends Properties {
     public String getCookieName() {
         return getProperty(ConfKeys.sessioncookiename.getName());
     }
+
+    public String getStaticFileLocation() {
+        return getProperty(ConfKeys.staticfilelocation.getName());
+    }
 }

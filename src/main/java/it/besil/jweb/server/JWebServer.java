@@ -35,6 +35,8 @@ public class JWebServer {
         this.http.port(conf.getServerPort());
         if (conf.getKeystorePath() != null && conf.getKeystorePassword() != null)
             http.secure(conf.getKeystorePath(), conf.getKeystorePassword(), null, null);
+//        http.staticFileLocation("/static");
+        http.staticFileLocation(conf.getStaticFileLocation());
 //        this.http.ipAddress("0.0.0.0");
     }
 
@@ -63,10 +65,10 @@ public class JWebServer {
         }
     }
 
-    private void install(JWebController resource) {
-        JWebHandler handler = resource.getHandler();
-        HttpMethod method = resource.getMethod();
-        String path = resource.getPath();
+    private void install(JWebController controller) {
+        JWebHandler handler = controller.getHandler();
+        HttpMethod method = controller.getMethod();
+        String path = controller.getPath();
 
         try {
             Method m = http.getClass().getDeclaredMethod(method.name(), String.class, Route.class);

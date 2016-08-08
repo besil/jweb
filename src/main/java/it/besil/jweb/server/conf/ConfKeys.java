@@ -11,6 +11,7 @@ public enum ConfKeys {
     port("server.port"),
     keystorepath("server.keystorepath"),
     keystorepassword("server.keystorepassword"),
+    staticfilelocation("server.resources.staticfilelocation"),
 
     // Session app configuration
     sessiondburl("session.db.url"),

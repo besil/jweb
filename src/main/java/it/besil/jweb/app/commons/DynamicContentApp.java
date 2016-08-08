@@ -71,6 +71,10 @@ public class DynamicContentApp extends JWebApp {
                         if (shouldReturnHtml(request)) {
                             response.type("text/html");
                             HashMap<String, Object> bindings = new Gson().fromJson(response.body(), HashMap.class);
+                            if (bindings == null) {
+                                log.info("No bindings found for " + request.pathInfo() + ". Using empty template");
+                                bindings = new HashMap<>();
+                            }
                             String template = route2template.get(request.pathInfo());
                             if (template != null) {
                                 String content = render(template, bindings);
