@@ -29,7 +29,7 @@ public abstract class JWebHandler<V extends Payload> implements Route {
         Payload p = null;
         try {
             p = payloadClass.newInstance();
-            Method payloadInit = payloadClass.getMethod("init", Request.class, Response.class); //, Response.class);
+            Method payloadInit = payloadClass.getMethod("init", Request.class, Response.class);
             payloadInit.invoke(p, new Object[]{request, response});
 
         } catch (Exception e) {
