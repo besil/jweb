@@ -6,13 +6,18 @@ package it.besil.jweb.server.conf;
 public enum ConfKeys {
     // debugging
     debug("debug"),
-    // Database
-//    dburl("db.url"), dbuser("db.user"), dbpwd("db.password"),
+
     // Server configuration
     port("server.port"),
     keystorepath("server.keystorepath"),
-    keystorepassword("server.keystorepassword");
-//    sessiontimeout("server.session.timeout");
+    keystorepassword("server.keystorepassword"),
+
+    // Session app configuration
+    sessiondburl("session.db.url"),
+    sessiondbuser("session.db.user"),
+    sessiondbpassword("session.db.password"),
+    sessiontimeoutduration("session.timeout.duration"),
+    sessioncookiename("session.cookie.name");
 
     private final String name;
 

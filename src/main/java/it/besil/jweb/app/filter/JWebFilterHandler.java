@@ -29,6 +29,7 @@ public abstract class JWebFilterHandler implements Filter {
             a = (Answer) m.invoke(this, request, response);
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println(e.getMessage());
             a = new ErrorAnswer(300, "Error while processing payload");
         }
 

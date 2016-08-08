@@ -68,7 +68,6 @@ public class DynamicContentApp extends JWebApp {
                 return new JWebFilterHandler(http) {
                     @Override
                     public Answer process(Request request, Response response) {
-
                         if (shouldReturnHtml(request)) {
                             response.type("text/html");
                             HashMap<String, Object> bindings = new Gson().fromJson(response.body(), HashMap.class);

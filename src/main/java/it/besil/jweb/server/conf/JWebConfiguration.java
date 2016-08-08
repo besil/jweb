@@ -47,4 +47,25 @@ public class JWebConfiguration extends Properties {
     public String getKeystorePassword() {
         return getProperty(ConfKeys.keystorepassword.getName());
     }
+
+    public String getDatabaseUrl() {
+        return getProperty(ConfKeys.sessiondburl.getName());
+    }
+
+    public String getDatabaseUser() {
+        return getProperty(ConfKeys.sessiondbuser.getName());
+    }
+
+
+    public String getDatabasePassword() {
+        return getProperty(ConfKeys.sessiondbpassword.getName());
+    }
+
+    public int getSessionTimeout() {
+        return Integer.parseInt(getProperty(ConfKeys.sessiontimeoutduration.getName()));
+    }
+
+    public String getCookieName() {
+        return getProperty(ConfKeys.sessioncookiename.getName());
+    }
 }
