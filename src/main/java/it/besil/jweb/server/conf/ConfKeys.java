@@ -7,11 +7,12 @@ public enum ConfKeys {
     // debugging
     debug("debug"),
     // Database
-    dburl("db.url"), dbuser("db.user"), dbpwd("db.password"),
+//    dburl("db.url"), dbuser("db.user"), dbpwd("db.password"),
     // Server configuration
     port("server.port"),
     keystorepath("server.keystorepath"),
-    sessiontimeout("server.session.timeout");
+    keystorepassword("server.keystorepassword");
+//    sessiontimeout("server.session.timeout");
 
     private final String name;
 

@@ -23,25 +23,10 @@ public class JWebConfiguration extends Properties {
         return Boolean.parseBoolean(getProperty(ConfKeys.debug.getName()));
     }
 
-    public String getDatabaseUrl() {
-        return getProperty(ConfKeys.dburl.getName());
-    }
-
-    public String getDatabaseUser() {
-        return getProperty(ConfKeys.dbuser.getName());
-    }
-
-    public String getDatabasePassword() {
-        return getProperty(ConfKeys.dbpwd.getName());
-    }
-
     public int getServerPort() {
         return Integer.parseInt(getProperty(ConfKeys.port.getName()));
     }
 
-    public int getSessionTimeout() {
-        return Integer.parseInt(getProperty(ConfKeys.sessiontimeout.getName()));
-    }
 
     @Override
     public synchronized String toString() {
@@ -59,4 +44,7 @@ public class JWebConfiguration extends Properties {
     }
 
 
+    public String getKeystorePassword() {
+        return getProperty(ConfKeys.keystorepassword.getName());
+    }
 }

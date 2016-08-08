@@ -32,6 +32,9 @@ public class JWebServer {
         log = LoggerFactory.getLogger(JWebServer.class);
         log.debug("Using conf\n{}", conf.toString());
         this.http = Service.ignite();
+        this.http.port(conf.getServerPort());
+        if (conf.getKeystorePath() != null && conf.getKeystorePassword() != null)
+            http.secure(conf.getKeystorePath(), conf.getKeystorePassword(), null, null);
 //        this.http.ipAddress("0.0.0.0");
     }
 
