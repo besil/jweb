@@ -9,7 +9,11 @@ import java.util.Map;
  */
 public class SuccessAnswer extends Answer {
     public SuccessAnswer(Map<String, Object> bindings) {
-        super(200, bindings);
+        super(SUCCESS, bindings);
+    }
+
+    public SuccessAnswer() {
+        this("message", "ok");
     }
 
     public SuccessAnswer(String key, Object value) {
