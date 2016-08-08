@@ -1,6 +1,6 @@
 {
   "name": "JWeb",
   "tagline": "",
-  "body": "# JWeb\r\n\r\nJWeb is a framework for developing and testing easily rest services.\r\nIt is built around [Spark](http://sparkjava.com/),\r\naccording with the [Spark testing guide](https://sparktutorials.github.io/2015/07/30/spark-testing-unit.html)\r\n\r\nThe framework aims to be a library with support for common funcionalities\r\n(such as pojo request mapping, session management),\r\nsimilarly to Django or other common web frameworks.\r\n\r\n## Installation\r\nPlease clone the repo and include it as maven dependency\r\n``` xml\r\n<dependency>\r\n    <groupId>it.besil.web</groupId>\r\n    <artifactId>jweb</artifactId>\r\n    <version>1.0.0</version>\r\n</dependency>\r\n```\r\n\r\n## Examples\r\n\r\nPlease find examples [here](https://github.com/besil/jwebsample)",
+  "body": "# JWeb\r\n\r\nJWeb is a framework for developing and testing easily rest services.\r\nIt is built around [Spark](http://sparkjava.com/),\r\naccording with the [Spark testing guide](https://sparktutorials.github.io/2015/07/30/spark-testing-unit.html)\r\n\r\nThe framework aims to be a library with support for common funcionalities\r\n(such as pojo request mapping, session management),\r\nsimilarly to Django or other common web frameworks.\r\n\r\n## Installation\r\nGrab the repo as [maven dependency](https://jitpack.io/#besil/jweb/v1.0.0)\r\n\r\n## Examples\r\n\r\nPlease find examples [here](https://github.com/besil/jwebsample)",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
