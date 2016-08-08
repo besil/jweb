@@ -11,7 +11,9 @@ similarly to Django or other common web frameworks.
 ### Features
 In addition to giving a standard structure to your server code,
 _jweb_ includes various out-of-the-box apps, such as:
+
 1. **DynamicContentApp**
+
 2. **SessionManagement**
 
 You can find examples [here](https://github.com/besil/jwebsample).
