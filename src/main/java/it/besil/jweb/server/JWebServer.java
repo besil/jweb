@@ -35,8 +35,8 @@ public class JWebServer {
         this.http.port(conf.getServerPort());
         if (conf.getKeystorePath() != null && conf.getKeystorePassword() != null)
             http.secure(conf.getKeystorePath(), conf.getKeystorePassword(), null, null);
-        http.staticFileLocation(conf.getStaticFileLocation());
-//        this.http.ipAddress("0.0.0.0");
+        if (conf.getStaticFileLocation() != null)
+            http.staticFileLocation(conf.getStaticFileLocation());
     }
 
     public void addApp(JWebApp app) {
