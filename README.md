@@ -21,7 +21,7 @@ You can find examples [here](https://github.com/besil/jwebsample).
 Other apps will come, as the project evolves. Contributions are very appreciated
 
 ## Installation
-Grab the repo as [maven dependency](https://jitpack.io/#besil/jweb/v1.0.0)
+Grab the repo as [maven dependency](https://jitpack.io/#besil/jweb)
 
 ## Examples
 
