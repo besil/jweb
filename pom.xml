@@ -6,7 +6,7 @@
 
     <groupId>it.besil.web</groupId>
     <artifactId>jweb</artifactId>
-    <version>v1.1.2</version>
+    <version>v1.1.3</version>
 
     <properties>
         <spark.version>LATEST</spark.version>
@@ -31,6 +31,14 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/resources</directory>
+                <excludes>
+                    <exclude>*</exclude>
+                </excludes>
+            </resource>
+        </resources>
     </build>
 
     <dependencies>
