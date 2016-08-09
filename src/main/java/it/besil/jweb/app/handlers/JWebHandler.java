@@ -1,6 +1,7 @@
 package it.besil.jweb.app.handlers;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import it.besil.jweb.app.answer.Answer;
 import it.besil.jweb.app.answer.ErrorAnswer;
 import it.besil.jweb.app.payloads.Payload;
@@ -15,12 +16,15 @@ import java.lang.reflect.Method;
 /**
  * Created by besil on 03/08/2016.
  */
-public abstract class JWebHandler<V extends Payload> implements Route {
+public abstract class JWebHandler<V extends Payload, A extends Answer> implements Route {
     private final Class<V> payloadClass;
+    private final Class<A> answerClass;
+    private final Gson gson = new GsonBuilder().serializeNulls().create();
     private Logger log = LoggerFactory.getLogger(JWebHandler.class);
 
-    public JWebHandler(Class<V> payloadClass) {
+    public JWebHandler(Class<V> payloadClass, Class<A> answerClass) {
         this.payloadClass = payloadClass;
+        this.answerClass = answerClass;
     }
 
     @Override
@@ -49,8 +53,17 @@ public abstract class JWebHandler<V extends Payload> implements Route {
         }
 
         response.type("application/json");
-        return new Gson().toJson(a.getBindings());
+        return gson.toJson(a);
     }
 
-    public abstract Answer process(V payload);
+
+    public Class<A> getAnswerClass() {
+        return answerClass;
+    }
+
+    public Class<V> getPayloadClass() {
+        return payloadClass;
+    }
+
+    public abstract A process(V payload);
 }

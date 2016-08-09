@@ -90,7 +90,7 @@ public class DynamicContentApp extends JWebApp {
                         } else {
                             response.type("application/json");
                         }
-                        return new SuccessAnswer("status", "ok");
+                        return new SuccessAnswer("status ok");
                     }
                 };
             }

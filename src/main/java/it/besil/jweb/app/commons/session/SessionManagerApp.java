@@ -70,7 +70,7 @@ public class SessionManagerApp extends JWebApp {
                         } catch (SQLException e) {
                             e.printStackTrace();
                         }
-                        return new SuccessAnswer("session", "valid");
+                        return new SuccessAnswer("session valid");
                     }
                 };
             }

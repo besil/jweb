@@ -1,26 +1,18 @@
 package it.besil.jweb.app.answer;
 
-import java.util.Map;
-
 /**
  * Created by besil on 01/05/2016.
  */
 public abstract class Answer {
     public static final int SUCCESS = 200;
     private final int status;
-    private final Map<String, Object> bindings;
 
-    public Answer(int status, Map<String, Object> bindings) {
+    public Answer(int status) {
         this.status = status;
-        this.bindings = bindings;
     }
 
     public int getStatus() {
         return status;
-    }
-
-    public Map<String, Object> getBindings() {
-        return bindings;
     }
 
     @Override
@@ -31,6 +23,6 @@ public abstract class Answer {
     }
 
     public boolean equals(Answer a) {
-        return this.getStatus() == a.getStatus() && this.bindings.equals(a.bindings);
+        return this.getStatus() == a.getStatus();
     }
 }

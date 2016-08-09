@@ -1,6 +1,7 @@
 package it.besil.jweb.server;
 
 import it.besil.jweb.app.JWebApp;
+import it.besil.jweb.app.commons.restdocs.RestDocsApp;
 import it.besil.jweb.app.filter.FilterType;
 import it.besil.jweb.app.filter.JWebFilter;
 import it.besil.jweb.app.filter.JWebFilterHandler;
@@ -25,6 +26,7 @@ import java.util.List;
 public class JWebServer {
     private final Service http;
     private Logger log;
+    private RestDocsApp restDocsApp;
 
     public JWebServer(JWebConfiguration conf) {
         if (conf.debugMode())
@@ -39,6 +41,10 @@ public class JWebServer {
             http.staticFileLocation(conf.getStaticFileLocation());
     }
 
+    public void addApp(RestDocsApp rds) {
+        this.restDocsApp = rds;
+    }
+
     public void addApp(JWebApp app) {
         log.debug("Installing app {}", app.getClass().getName());
         List<? extends JWebFilter> filters = app.getFilters();
@@ -48,6 +54,11 @@ public class JWebServer {
         List<? extends JWebController> resources = app.getControllers();
         for (JWebController resource : resources) {
             this.install(resource);
+        }
+
+        if (restDocsApp != null) {
+            for (JWebController c : restDocsApp.getControllers(app))
+                this.install(c);
         }
     }
 

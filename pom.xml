@@ -93,6 +93,4 @@
             <version>${junit.version}</version>
         </dependency>
     </dependencies>
-
-
 </project>

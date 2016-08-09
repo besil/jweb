@@ -1,22 +1,18 @@
 package it.besil.jweb.app.answer;
 
-import com.google.common.collect.ImmutableMap;
-
-import java.util.Map;
-
 /**
  * Created by besil on 03/08/2016.
  */
-public class SuccessAnswer extends Answer {
-    public SuccessAnswer(Map<String, Object> bindings) {
-        super(SUCCESS, bindings);
+public final class SuccessAnswer extends Answer {
+    private final String message;
+
+    public SuccessAnswer(String message) {
+        super(SUCCESS);
+        this.message = message;
     }
 
-    public SuccessAnswer() {
-        this("message", "ok");
+    public final String getMessage() {
+        return message;
     }
 
-    public SuccessAnswer(String key, Object value) {
-        this(ImmutableMap.of(key, value));
-    }
 }

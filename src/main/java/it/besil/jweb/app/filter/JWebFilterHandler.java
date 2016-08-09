@@ -1,6 +1,7 @@
 package it.besil.jweb.app.filter;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import it.besil.jweb.app.answer.Answer;
 import it.besil.jweb.app.answer.ErrorAnswer;
 import spark.Filter;
@@ -14,6 +15,7 @@ import java.lang.reflect.Method;
  * Created by besil on 03/08/2016.
  */
 public abstract class JWebFilterHandler implements Filter {
+    private final Gson gson = new GsonBuilder().serializeNulls().create();
     private final Service http;
 
     public JWebFilterHandler(Service http) {
@@ -34,7 +36,7 @@ public abstract class JWebFilterHandler implements Filter {
         }
 
         if (a instanceof ErrorAnswer) {
-            String message = new Gson().toJson(a.getBindings());
+            String message = gson.toJson(a);
             response.type("application/json");
             http.halt(message);
         }
