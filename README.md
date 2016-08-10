@@ -12,7 +12,7 @@ similarly to Django or other common web frameworks.
 In addition to giving a standard structure to your server code,
 _jweb_ includes various out-of-the-box apps, such as:
 
-1. **RestDocsApp**: automatic REST documentation generator
+1. **RestDocsApp**: automatic REST Schema generator for your endpoints
 
 2. **DynamicContentApp**: switching from HTML or JSON output dinamically
 
