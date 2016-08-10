@@ -32,6 +32,7 @@ public class RestDocsApp extends JWebApp {
 
         try {
             for (JWebController controller : app.getControllers()) {
+                log.debug("Fetching: " + controller.getClass().getSimpleName());
                 JWebHandler handler = controller.getHandler();
                 HttpMethod method = controller.getMethod();
                 String path = controller.getPath();
