@@ -4,7 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import it.besil.jweb.app.answer.Answer;
 import it.besil.jweb.app.answer.ErrorAnswer;
+import it.besil.jweb.app.commons.session.SessionManager;
+import it.besil.jweb.app.commons.session.SessionPayload;
 import it.besil.jweb.app.payloads.Payload;
+import it.besil.jweb.server.conf.JWebConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Request;
@@ -21,6 +24,7 @@ public abstract class JWebHandler<V extends Payload, A extends Answer> implement
     private final Class<A> answerClass;
     private final Gson gson;
     private Logger log = LoggerFactory.getLogger(JWebHandler.class);
+    private JWebConfiguration jwebconf;
 
     public JWebHandler(Class<V> payloadClass, Class<A> answerClass) {
         this.payloadClass = payloadClass;
@@ -33,9 +37,17 @@ public abstract class JWebHandler<V extends Payload, A extends Answer> implement
         Answer a = null;
         Payload p = null;
         try {
+//            if( payloadClass.isAssignableFrom(SessionPayload.class) )
+//                p = payloadClass.getConstructor(SessionManager.class).newInstance(new SessionManager(jwebconf));
+//            else
             p = payloadClass.newInstance();
+            if (p instanceof SessionPayload)
+                ((SessionPayload) p).setSessionManager(new SessionManager(jwebconf));
+
+
             Method payloadInit = payloadClass.getMethod("init", Request.class, Response.class);
             payloadInit.invoke(p, new Object[]{request, response});
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -67,4 +79,12 @@ public abstract class JWebHandler<V extends Payload, A extends Answer> implement
     }
 
     public abstract A process(V payload);
+
+    public JWebConfiguration getJWebConf() {
+        return jwebconf;
+    }
+
+    public void setJWebConf(JWebConfiguration JWebConf) {
+        this.jwebconf = JWebConf;
+    }
 }

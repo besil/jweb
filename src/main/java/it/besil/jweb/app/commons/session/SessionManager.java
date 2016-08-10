@@ -66,14 +66,14 @@ public class SessionManager {
         usb.setSessionkey(key);
         usb.setDuration(timeoutSeconds);
         usb.setExpirationTime(expirationTime);
-        usb.setSessionMail(sessionMail);
+        usb.setSessionId(sessionMail);
 
         try {
             sessionDao.create(usb);
             res.cookie(cookieName, key, timeoutSeconds);
             return usb;
         } catch (SQLException e) {
-//            e.printStackTrace();
+            e.printStackTrace();
         }
         return new InvalidSessionBean();
     }

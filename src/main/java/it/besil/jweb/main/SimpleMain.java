@@ -3,8 +3,6 @@ package it.besil.jweb.main;
 import it.besil.jweb.app.commons.restdocs.RestDocsApp;
 import it.besil.jweb.server.JWebServer;
 import it.besil.jweb.server.conf.JWebConfiguration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 

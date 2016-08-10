@@ -46,7 +46,7 @@ public class SessionManagerApp extends JWebApp {
                             Date expirationTime = usb.getExpirationTime();
 
                             log.trace("Analyzing request {}", usb);
-                            log.trace("Session is: {}", usb.getClass());
+                            log.trace("Session is: {}", usb.getClass().getSimpleName());
                             log.trace("Current time: {}", currentTime);
                             log.trace("Expiration time: {}", expirationTime);
 

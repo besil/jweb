@@ -17,11 +17,11 @@ public class UserSessionBean {
     @DatabaseField(canBeNull = false)
     private int duration;
     @DatabaseField(canBeNull = false)
-    private String sessionMail;
+    private String sessionId;
 
     @Override
     public String toString() {
-        return sessionkey + "-" + expirationTime + "-" + duration + "-" + sessionMail;
+        return sessionkey + "-" + expirationTime + "-" + duration + "-" + sessionId;
     }
 
     public String getSessionkey() {
@@ -48,11 +48,11 @@ public class UserSessionBean {
         this.duration = duration;
     }
 
-    public String getSessionMail() {
-        return sessionMail;
+    public String getSessionId() {
+        return sessionId;
     }
 
-    public void setSessionMail(String sessionMail) {
-        this.sessionMail = sessionMail;
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 }

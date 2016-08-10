@@ -11,7 +11,6 @@ import it.besil.jweb.app.resources.JWebController;
 import it.besil.jweb.server.conf.JWebConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.event.Level;
 import spark.Filter;
 import spark.Route;
 import spark.Service;
@@ -25,12 +24,14 @@ import java.util.List;
  */
 public class JWebServer {
     private final Service http;
+    private final JWebConfiguration conf;
     private Logger log;
     private RestDocsApp restDocsApp;
 
     public JWebServer(JWebConfiguration conf) {
 //        if (conf.debugMode())
 //            System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, Level.DEBUG.name());
+        this.conf = conf;
         log = LoggerFactory.getLogger(JWebServer.class);
         log.debug("Using conf\n{}", conf.toString());
         this.http = Service.ignite();
@@ -77,6 +78,7 @@ public class JWebServer {
 
     private void install(JWebController controller) {
         JWebHandler handler = controller.getHandler();
+        handler.setJWebConf(conf);
         HttpMethod method = controller.getMethod();
         String path = controller.getPath();
 
