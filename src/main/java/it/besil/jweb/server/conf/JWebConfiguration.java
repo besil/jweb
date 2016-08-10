@@ -19,10 +19,6 @@ public class JWebConfiguration extends Properties {
         this.load(new FileInputStream(path));
     }
 
-    public boolean debugMode() {
-        return Boolean.parseBoolean(getProperty(ConfKeys.debug.getName()));
-    }
-
     public int getServerPort() {
         return Integer.parseInt(getProperty(ConfKeys.port.getName()));
     }

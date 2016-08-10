@@ -19,12 +19,13 @@ import java.lang.reflect.Method;
 public abstract class JWebHandler<V extends Payload, A extends Answer> implements Route {
     private final Class<V> payloadClass;
     private final Class<A> answerClass;
-    private final Gson gson = new GsonBuilder().serializeNulls().create();
+    private final Gson gson;
     private Logger log = LoggerFactory.getLogger(JWebHandler.class);
 
     public JWebHandler(Class<V> payloadClass, Class<A> answerClass) {
         this.payloadClass = payloadClass;
         this.answerClass = answerClass;
+        this.gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
     }
 
     @Override

@@ -29,8 +29,8 @@ public class JWebServer {
     private RestDocsApp restDocsApp;
 
     public JWebServer(JWebConfiguration conf) {
-        if (conf.debugMode())
-            System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, Level.DEBUG.name());
+//        if (conf.debugMode())
+//            System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, Level.DEBUG.name());
         log = LoggerFactory.getLogger(JWebServer.class);
         log.debug("Using conf\n{}", conf.toString());
         this.http = Service.ignite();
@@ -46,7 +46,7 @@ public class JWebServer {
     }
 
     public void addApp(JWebApp app) {
-        log.debug("Installing app {}", app.getClass().getName());
+        log.debug("Installing app {}", app.getClass().getSimpleName());
         List<? extends JWebFilter> filters = app.getFilters();
         for (JWebFilter filter : filters) {
             this.install(filter);
