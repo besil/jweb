@@ -12,9 +12,11 @@ similarly to Django or other common web frameworks.
 In addition to giving a standard structure to your server code,
 _jweb_ includes various out-of-the-box apps, such as:
 
-1. **DynamicContentApp**
+1. **RestDocsApp**: automatic REST documentation generator
 
-2. **SessionManagement**
+2. **DynamicContentApp**: switching from HTML or JSON output dinamically
+
+3. **SessionManagerApp**: session manager app
 
 You can find examples [here](https://github.com/besil/jwebsample).
 
