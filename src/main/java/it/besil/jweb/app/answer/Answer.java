@@ -4,6 +4,7 @@ package it.besil.jweb.app.answer;
  * Created by besil on 01/05/2016.
  */
 public interface Answer {
+
 //    public static final int SUCCESS = 200;
 //    private final int status;
 //

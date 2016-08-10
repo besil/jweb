@@ -13,4 +13,8 @@ public class MessageAnswer implements Answer {
     public String getMessage() {
         return message;
     }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }
