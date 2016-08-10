@@ -1,7 +1,7 @@
 package it.besil.jweb.main;
 
 import it.besil.jweb.app.JWebApp;
-import it.besil.jweb.app.answer.Answer;
+import it.besil.jweb.app.answer.StatusAnswer;
 import it.besil.jweb.app.handlers.JWebHandler;
 import it.besil.jweb.app.payloads.Payload;
 import it.besil.jweb.app.resources.HttpMethod;
@@ -46,7 +46,7 @@ public class SimpleApp extends JWebApp {
         });
     }
 
-    public static class SimpleAnswer extends Answer {
+    public static class SimpleAnswer extends StatusAnswer {
         private final String simple;
         private final int num = 5;
 

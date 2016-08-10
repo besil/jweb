@@ -1,7 +1,7 @@
 package it.besil.jweb.app.commons.restdocs;
 
 import it.besil.jweb.app.JWebApp;
-import it.besil.jweb.app.answer.Answer;
+import it.besil.jweb.app.answer.SuccessAnswer;
 import it.besil.jweb.app.handlers.JWebHandler;
 import it.besil.jweb.app.payloads.EmptyPayload;
 import it.besil.jweb.app.resources.HttpMethod;
@@ -50,11 +50,11 @@ public class RestDocsApp extends JWebApp {
         return controllers;
     }
 
-    public static class ListAnswer extends Answer {
+    public static class ListAnswer extends SuccessAnswer {
         private List<String> docs;
 
         public ListAnswer(List<String> docs) {
-            super(SUCCESS);
+            super("everything ok");
             this.docs = docs;
         }
 
