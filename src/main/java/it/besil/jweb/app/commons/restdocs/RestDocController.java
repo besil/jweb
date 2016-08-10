@@ -42,6 +42,6 @@ public class RestDocController extends JWebController {
 
     @Override
     public String getPath() {
-        return "/restdocs/" + this.path;
+        return "/restdocs" + this.path;
     }
 }
