@@ -41,7 +41,6 @@ public class RestDocsApp extends JWebApp {
 //                    System.out.println("   " + f.getName() + ": " + f.getType().getSimpleName());
 //                }
                 Map<String, Object> answerMap = Utils.inspect(handler.getAnswerClass());
-
                 controllers.add(new RestDocController(path, getJWebConf(), method, payloadMap, answerMap));
             }
         } catch (Exception e) {

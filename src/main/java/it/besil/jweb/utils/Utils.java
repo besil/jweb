@@ -1,5 +1,7 @@
 package it.besil.jweb.utils;
 
+import it.besil.jweb.app.commons.restdocs.NoRestDocs;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -33,24 +35,27 @@ public class Utils {
 
     public static Map<String, Object> inspect(Class<?> clazz) throws IllegalAccessException {
         Map<String, Object> m = new HashMap<>();
+//        System.out.println(clazz);
         Field[] fields = clazz.getDeclaredFields();
         for (Field f : fields) {
-            Class<?> t = f.getType();
+            NoRestDocs noRestDocs = f.getAnnotation(NoRestDocs.class);
+            if (noRestDocs == null) {
+                Class<?> t = f.getType();
 //            System.out.println(f.getName() + " --> " + type(t));
 
-            switch (type(t)) {
-                case "PRIMITIVE":
-                    m.put(f.getName(), f.getType().getSimpleName());
-                    break;
-                case "ARRAY":
+                switch (type(t)) {
+                    case "PRIMITIVE":
+                        m.put(f.getName(), f.getType().getSimpleName());
+                        break;
+                    case "ARRAY":
 //                    String arrayformat = "%s";
-                    String data;
+                        String data;
 //                    if (type(t.getComponentType()).equals("PRIMITIVE"))
-                    data = t.getComponentType().getSimpleName();
-                    while (data.contains("[]")) {
-                        data = data.replace("[]", "");
-                        data = "List[" + data + "]";
-                    }
+                        data = t.getComponentType().getSimpleName();
+                        while (data.contains("[]")) {
+                            data = data.replace("[]", "");
+                            data = "List[" + data + "]";
+                        }
 //                    else {
 //                        Class<?> tmp = t;
 //                        while (type(tmp.getComponentType()).equals("ARRAY")) {
@@ -60,33 +65,34 @@ public class Utils {
 //                    data = inspect(t.getComponentType()).toString();
 //            }
 //                    m.put(f.getName(), arrayformat.format(data));
-                    m.put(f.getName(), "List[" + data + "]");
-                    break;
-                case "COLLECTION":
-                    Type type = f.getGenericType();
-                    String format = type instanceof ParameterizedType ? "%s" : "List<%s>";
-                    while (type instanceof ParameterizedType) {
-                        ParameterizedType pt = (ParameterizedType) type;
-                        type = pt.getActualTypeArguments()[0];
-                        format = "List[" + format + "]";
-                    }
+                        m.put(f.getName(), "List[" + data + "]");
+                        break;
+                    case "COLLECTION":
+                        Type type = f.getGenericType();
+                        String format = type instanceof ParameterizedType ? "%s" : "List<%s>";
+                        while (type instanceof ParameterizedType) {
+                            ParameterizedType pt = (ParameterizedType) type;
+                            type = pt.getActualTypeArguments()[0];
+                            format = "List[" + format + "]";
+                        }
 
-                    Class<?> clzz = (Class<?>) type;
-                    if (type(clzz).equals("PRIMITIVE")) {
-                        m.put(f.getName(), String.format(format, clzz.getSimpleName()));
-                    } else {
-                        Map<String, Object> nested = inspect(clzz);
-                        m.put(f.getName(), String.format(format, nested));
-                    }
+                        Class<?> clzz = (Class<?>) type;
+                        if (type(clzz).equals("PRIMITIVE")) {
+                            m.put(f.getName(), String.format(format, clzz.getSimpleName()));
+                        } else {
+                            Map<String, Object> nested = inspect(clzz);
+                            m.put(f.getName(), String.format(format, nested));
+                        }
 
-                    break;
-                case "CUSTOM":
-                    Map<String, Object> nestedObj = inspect(f.getType());
-                    m.put(f.getName(), nestedObj);
-                    break;
-                default:
-                    System.out.println("BOH! " + f.getClass());
-                    break;
+                        break;
+                    case "CUSTOM":
+                        Map<String, Object> nestedObj = inspect(f.getType());
+                        m.put(f.getName(), nestedObj);
+                        break;
+                    default:
+                        System.out.println("BOH! " + f.getClass());
+                        break;
+                }
             }
         }
 
