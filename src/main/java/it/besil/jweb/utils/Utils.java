@@ -21,6 +21,8 @@ public class Utils {
     }
 
     private static String type(Class<?> t) {
+        if (t.isArray())
+            return "ARRAY";
         if (isSystemClass(t))
             return "PRIMITIVE";
         if (Collection.class.isAssignableFrom(t))
@@ -39,6 +41,26 @@ public class Utils {
             switch (type(t)) {
                 case "PRIMITIVE":
                     m.put(f.getName(), f.getType().getSimpleName());
+                    break;
+                case "ARRAY":
+//                    String arrayformat = "%s";
+                    String data;
+//                    if (type(t.getComponentType()).equals("PRIMITIVE"))
+                    data = t.getComponentType().getSimpleName();
+                    while (data.contains("[]")) {
+                        data = data.replace("[]", "");
+                        data = "List[" + data + "]";
+                    }
+//                    else {
+//                        Class<?> tmp = t;
+//                        while (type(tmp.getComponentType()).equals("ARRAY")) {
+//                            tmp = tmp.getComponentType();
+//                            arrayformat = "List[" + arrayformat + "]";
+//                        }
+//                    data = inspect(t.getComponentType()).toString();
+//            }
+//                    m.put(f.getName(), arrayformat.format(data));
+                    m.put(f.getName(), "List[" + data + "]");
                     break;
                 case "COLLECTION":
                     Type type = f.getGenericType();

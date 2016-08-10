@@ -15,6 +15,10 @@ public class Example {
     public List<List<String>> mylast2;
     public List<List<MyObj>> mylast;
     public List<MyObj> myl;
+    private double[][] doubles;
+    private long[][][] longs;
+    private int[] ints;
+    private MyObj[] myobjs;
     private int a;
     private String b;
     private Integer d;
