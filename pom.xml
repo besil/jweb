@@ -6,7 +6,7 @@
 
     <groupId>it.besil.web</groupId>
     <artifactId>jweb</artifactId>
-    <version>v1.2.1</version>
+    <version>v1.2.3</version>
 
     <properties>
         <spark.version>LATEST</spark.version>
