@@ -1,0 +1,23 @@
+<html>
+
+<body>
+<h2>Path: {{path}}</h2>
+
+{% for sc in schema %}
+<div>
+    <h3>Method: {{ sc.method }}</h3>
+    <div>
+        <h4>Payload</h4>
+        {% for key, value in sc.payloadSchema.items() %}
+        <b>{{key}}</b>: {{value}}</br>
+        {% endfor %}
+    </div>
+    <div>
+        <h4>Answer</h4>
+    </div>
+
+    {% endfor %}
+</div>
+</body>
+
+</html>

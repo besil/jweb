@@ -1,9 +1,9 @@
 package it.besil.jweb.main;
 
+import it.besil.jweb.app.commons.DynamicContentApp;
 import it.besil.jweb.app.commons.restdocs.RestDocsApp;
 import it.besil.jweb.server.JWebServer;
 import it.besil.jweb.server.conf.JWebConfiguration;
-import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.io.IOException;
 
@@ -15,6 +15,7 @@ public class SimpleMain {
         JWebConfiguration jwconf = new JWebConfiguration();
         JWebServer jweb = new JWebServer(jwconf);
 
+        jweb.addApp(new DynamicContentApp(jwconf, "mappings"));
         jweb.addApp(new RestDocsApp(jwconf));
         jweb.addApp(new SimpleApp(jwconf));
     }
