@@ -1,7 +1,8 @@
 package it.besil.jweb.app.handlers;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import it.besil.jweb.app.answer.Answer;
 import it.besil.jweb.app.answer.ErrorAnswer;
 import it.besil.jweb.app.commons.session.SessionManager;
@@ -22,14 +23,13 @@ import java.lang.reflect.Method;
 public abstract class JWebHandler<V extends Payload, A extends Answer> implements Route {
     private final Class<V> payloadClass;
     private final Class<A> answerClass;
-    private final Gson gson;
     private Logger log = LoggerFactory.getLogger(JWebHandler.class);
     private JWebConfiguration jwebconf;
 
     public JWebHandler(Class<V> payloadClass, Class<A> answerClass) {
         this.payloadClass = payloadClass;
         this.answerClass = answerClass;
-        this.gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
+//        this.gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
     }
 
     @Override
@@ -66,7 +66,9 @@ public abstract class JWebHandler<V extends Payload, A extends Answer> implement
         }
 
         response.type("application/json");
-        return gson.toJson(a);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(a);
     }
 
 

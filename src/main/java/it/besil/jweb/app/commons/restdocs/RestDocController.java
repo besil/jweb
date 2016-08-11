@@ -6,6 +6,7 @@ import it.besil.jweb.app.resources.HttpMethod;
 import it.besil.jweb.app.resources.JWebController;
 import it.besil.jweb.server.conf.JWebConfiguration;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,17 +14,14 @@ import java.util.Map;
  */
 public class RestDocController extends JWebController {
     private final String path;
-    private final String method;
-    private final Map<String, Object> payload;
-    private final Map<String, Object> answer;
+    private final List<RestDocsApp.MethodSchema> schema;
 
-    public RestDocController(String path, JWebConfiguration jWebConf, HttpMethod method, Map<String, Object> payloadMap, Map<String, Object> answerMap) {
+    public RestDocController(JWebConfiguration jWebConf, String path, List<RestDocsApp.MethodSchema> methodSchemas) {
         super(jWebConf);
         this.path = path;
-        this.method = method.name().toUpperCase();
-        this.payload = payloadMap;
-        this.answer = answerMap;
+        this.schema = methodSchemas;
     }
+
 
     @Override
     public HttpMethod getMethod() {
@@ -35,7 +33,7 @@ public class RestDocController extends JWebController {
         return new JWebHandler<EmptyPayload, RestDocAnswer>(EmptyPayload.class, RestDocAnswer.class) {
             @Override
             public RestDocAnswer process(EmptyPayload ep) {
-                return new RestDocAnswer(path, method, payload, answer);
+                return new RestDocAnswer(path, schema);
             }
         };
     }

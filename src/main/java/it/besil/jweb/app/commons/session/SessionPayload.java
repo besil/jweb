@@ -1,6 +1,5 @@
 package it.besil.jweb.app.commons.session;
 
-import it.besil.jweb.app.commons.restdocs.NoRestDocs;
 import it.besil.jweb.app.payloads.Payload;
 import spark.Request;
 import spark.Response;
@@ -9,9 +8,9 @@ import spark.Response;
  * Created by besil on 10/08/2016.
  */
 public class SessionPayload implements Payload {
-    @NoRestDocs
+//    @NoRestDocs
     private SessionManager sessionManager;
-    @NoRestDocs
+//    @NoRestDocs
     private String sessionId;
 
     public final SessionManager getSessionManager() {
