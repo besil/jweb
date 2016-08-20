@@ -1,5 +1,6 @@
 package it.besil.jweb.app.commons.session;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.besil.jweb.app.payloads.Payload;
 import spark.Request;
 import spark.Response;
@@ -8,9 +9,9 @@ import spark.Response;
  * Created by besil on 10/08/2016.
  */
 public class SessionPayload implements Payload {
-//    @NoRestDocs
+    @JsonIgnore
     private SessionManager sessionManager;
-//    @NoRestDocs
+    @JsonIgnore
     private String sessionId;
 
     public final SessionManager getSessionManager() {
