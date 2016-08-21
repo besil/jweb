@@ -16,7 +16,7 @@ _jweb_ includes various out-of-the-box apps, such as:
 
 2. **DynamicContentApp**: switching from HTML or JSON output dinamically
 
-3. **SessionManagerApp**: session manager app
+3. **SessionManagerApp**: session management
 
 You can find examples [here](https://github.com/besil/jwebsample).
 
