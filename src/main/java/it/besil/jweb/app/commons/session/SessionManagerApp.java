@@ -3,6 +3,7 @@ package it.besil.jweb.app.commons.session;
 import it.besil.jweb.app.JWebApp;
 import it.besil.jweb.app.answer.ErrorAnswer;
 import it.besil.jweb.app.answer.ReturnCodeAnswer;
+import it.besil.jweb.app.answer.ReturnCodeMessageAnswer;
 import it.besil.jweb.app.answer.SuccessAnswer;
 import it.besil.jweb.app.filter.FilterType;
 import it.besil.jweb.app.filter.JWebFilter;
@@ -38,7 +39,7 @@ public class SessionManagerApp extends JWebApp {
             public JWebFilterHandler getHandler(Service http) {
                 return new JWebFilterHandler(http) {
                     @Override
-                    public ReturnCodeAnswer process(Request request, Response response) {
+                    public ReturnCodeMessageAnswer process(Request request, Response response) {
                         try {
                             SessionManager sm = new SessionManager(getJWebConf());
                             UserSessionBean usb = sm.getSession(request);
