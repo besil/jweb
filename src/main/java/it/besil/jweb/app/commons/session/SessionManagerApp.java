@@ -1,8 +1,8 @@
 package it.besil.jweb.app.commons.session;
 
 import it.besil.jweb.app.JWebApp;
-import it.besil.jweb.app.answer.Answer;
 import it.besil.jweb.app.answer.ErrorAnswer;
+import it.besil.jweb.app.answer.ReturnCodeAnswer;
 import it.besil.jweb.app.answer.SuccessAnswer;
 import it.besil.jweb.app.filter.FilterType;
 import it.besil.jweb.app.filter.JWebFilter;
@@ -38,7 +38,7 @@ public class SessionManagerApp extends JWebApp {
             public JWebFilterHandler getHandler(Service http) {
                 return new JWebFilterHandler(http) {
                     @Override
-                    public Answer process(Request request, Response response) {
+                    public ReturnCodeAnswer process(Request request, Response response) {
                         try {
                             SessionManager sm = new SessionManager(getJWebConf());
                             UserSessionBean usb = sm.getSession(request);
@@ -64,7 +64,6 @@ public class SessionManagerApp extends JWebApp {
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-//                               http.halt(200, "must login");
                                 return new ErrorAnswer("must login");
                             }
                         } catch (SQLException e) {

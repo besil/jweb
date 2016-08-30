@@ -3,7 +3,7 @@ package it.besil.jweb.app.answer;
 /**
  * Created by besil on 03/08/2016.
  */
-public class SuccessAnswer extends StatusAnswer {
+public class SuccessAnswer extends ReturnCodeAnswer {
     private final String message;
 
     public SuccessAnswer(int status, String message) {

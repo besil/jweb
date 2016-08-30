@@ -3,11 +3,11 @@ package it.besil.jweb.app.answer;
 /**
  * Created by besil on 06/07/2016.
  */
-public class ErrorAnswer extends StatusAnswer {
+public class ErrorAnswer extends ReturnCodeAnswer {
     private final String message;
 
-    public ErrorAnswer(int status, String message) {
-        super(status);
+    public ErrorAnswer(int returnCode, String message) {
+        super(returnCode);
         this.message = message;
     }
 
