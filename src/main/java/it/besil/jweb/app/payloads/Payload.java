@@ -17,7 +17,7 @@ public interface Payload {
             for (Field field : fields) {
                 if (!field.isAnnotationPresent(JsonIgnore.class)) {
                     field.setAccessible(true);
-                    field.set(this, req.queryParams(field.getName()));
+                    field.set(this, new PrimitiveTranslator().getConverter(field.getType()).apply(req.queryParams(field.getName())));
                 }
             }
         } catch (IllegalAccessException e) {
