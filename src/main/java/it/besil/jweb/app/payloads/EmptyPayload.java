@@ -10,6 +10,6 @@ import spark.Response;
 public class EmptyPayload implements Payload {
     @Override
     public void init(Request req, Response resp) {
-
+        // explicitly not calling default method implementation
     }
 }

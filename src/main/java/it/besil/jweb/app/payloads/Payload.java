@@ -1,5 +1,6 @@
 package it.besil.jweb.app.payloads;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import spark.Request;
 import spark.Response;
 
@@ -14,8 +15,10 @@ public interface Payload {
         Field[] fields = this.getClass().getDeclaredFields();
         try {
             for (Field field : fields) {
-                field.setAccessible(true);
-                field.set(this, req.queryParams(field.getName()));
+                if (!field.isAnnotationPresent(JsonIgnore.class)) {
+                    field.setAccessible(true);
+                    field.set(this, req.queryParams(field.getName()));
+                }
             }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
