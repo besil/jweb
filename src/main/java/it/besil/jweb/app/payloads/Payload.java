@@ -15,7 +15,7 @@ public interface Payload {
         Field[] fields = this.getClass().getDeclaredFields();
         try {
             for (Field field : fields) {
-                if (!field.isAnnotationPresent(JsonIgnore.class)) {
+                if (!(field.isAnnotationPresent(JsonIgnore.class) || field.isAnnotationPresent(NoPayloadMarshalling.class))) {
                     field.setAccessible(true);
                     field.set(this, new PrimitiveTranslator().getConverter(field.getType()).apply(req.queryParams(field.getName())));
                 }
