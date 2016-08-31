@@ -3,6 +3,8 @@ package it.besil.jweb.app.handlers;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import it.besil.jweb.app.answer.Answer;
 import it.besil.jweb.app.answer.ErrorAnswer;
 import it.besil.jweb.app.commons.session.SessionManager;
@@ -67,8 +69,11 @@ public abstract class JWebHandler<V extends Payload, A extends Answer> implement
 
         response.type("application/json");
         ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(a);
+
     }
 
 
