@@ -25,13 +25,17 @@ import java.lang.reflect.Method;
 public abstract class JWebHandler<V extends Payload, A extends Answer> implements Route {
     private final Class<V> payloadClass;
     private final Class<A> answerClass;
+    private final ObjectMapper mapper;
     private Logger log = LoggerFactory.getLogger(JWebHandler.class);
     private JWebConfiguration jwebconf;
 
     public JWebHandler(Class<V> payloadClass, Class<A> answerClass) {
+        this.mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         this.payloadClass = payloadClass;
         this.answerClass = answerClass;
-//        this.gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
     }
 
     @Override
@@ -39,13 +43,9 @@ public abstract class JWebHandler<V extends Payload, A extends Answer> implement
         Answer a = null;
         Payload p = null;
         try {
-//            if( payloadClass.isAssignableFrom(SessionPayload.class) )
-//                p = payloadClass.getConstructor(SessionManager.class).newInstance(new SessionManager(jwebconf));
-//            else
             p = payloadClass.newInstance();
             if (p instanceof SessionPayload)
                 ((SessionPayload) p).setSessionManager(new SessionManager(jwebconf));
-
 
             Method payloadInit = payloadClass.getMethod("init", Request.class, Response.class);
             payloadInit.invoke(p, new Object[]{request, response});
@@ -68,10 +68,6 @@ public abstract class JWebHandler<V extends Payload, A extends Answer> implement
         }
 
         response.type("application/json");
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new JavaTimeModule());
-        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(a);
 
     }
