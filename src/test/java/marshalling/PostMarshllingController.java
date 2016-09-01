@@ -3,7 +3,6 @@ package marshalling;
 import it.besil.jweb.app.answer.Answer;
 import it.besil.jweb.app.handlers.JWebHandler;
 import it.besil.jweb.app.payloads.Payload;
-import it.besil.jweb.app.payloads.QueryParam;
 import it.besil.jweb.app.resources.HttpMethod;
 import it.besil.jweb.app.resources.JWebController;
 import it.besil.jweb.server.conf.JWebConfiguration;
@@ -39,7 +38,6 @@ public class PostMarshllingController extends JWebController {
     }
 
     public static class PostPayload implements Payload {
-        @QueryParam
         String foo;
         int bar;
         List<Integer> bars;
