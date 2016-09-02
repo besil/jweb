@@ -1,4 +1,4 @@
-package it.besil.jweb.app.answer;
+package it.besil.jweb.app.protocol.answer;
 
 /**
  * Created by besil on 03/08/2016.

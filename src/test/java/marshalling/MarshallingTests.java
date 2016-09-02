@@ -38,8 +38,6 @@ public class MarshallingTests extends AbstractBehaviouralTest {
                 .queryString("foos", sp.foos)
                 .asJson().getBody().getObject();
 
-        System.out.println(prettify(resp.toString()));
-
         Assert.assertEquals(sp.foo, resp.getString("foo"));
         Assert.assertEquals(sp.bar, resp.getInt("bar"));
         Assert.assertEquals(sp.zdt, ZonedDateTime.parse(resp.getString("zdt"), DateTimeFormatter.ISO_DATE_TIME));
@@ -72,7 +70,6 @@ public class MarshallingTests extends AbstractBehaviouralTest {
         Assert.assertEquals(pp.getBar(), resp.getInt("bar"));
         Assert.assertEquals(pp.getFoo(), resp.getString("foo"));
 //        Assert.assertEquals(pp.getBars(), );
-        System.out.println(resp.getJSONArray("bars"));
         Assert.assertEquals(pp.getBar(), Arrays.asList(resp.getJSONArray("bars")));
     }
 

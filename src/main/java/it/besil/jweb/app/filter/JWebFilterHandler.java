@@ -2,8 +2,8 @@ package it.besil.jweb.app.filter;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import it.besil.jweb.app.answer.Answer;
-import it.besil.jweb.app.answer.ErrorAnswer;
+import it.besil.jweb.app.protocol.answer.Answer;
+import it.besil.jweb.app.protocol.answer.ErrorAnswer;
 import spark.Filter;
 import spark.Request;
 import spark.Response;
@@ -31,7 +31,6 @@ public abstract class JWebFilterHandler implements Filter {
             a = (Answer) m.invoke(this, request, response);
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println(e.getMessage());
             a = new ErrorAnswer(300, "Error while processing payload");
         }
 

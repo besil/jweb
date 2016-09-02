@@ -1,10 +1,8 @@
 package it.besil.jweb.app.commons.restdocs;
 
-import it.besil.jweb.app.answer.Answer;
-import it.besil.jweb.app.answer.SuccessAnswer;
+import it.besil.jweb.app.protocol.answer.Answer;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by besil on 09/08/2016.

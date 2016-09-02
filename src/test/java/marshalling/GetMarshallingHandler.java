@@ -1,8 +1,8 @@
 package marshalling;
 
-import it.besil.jweb.app.answer.Answer;
 import it.besil.jweb.app.handlers.JWebHandler;
-import it.besil.jweb.app.payloads.Payload;
+import it.besil.jweb.app.protocol.answer.Answer;
+import it.besil.jweb.app.protocol.payloads.Payload;
 
 import java.time.ZonedDateTime;
 import java.util.List;

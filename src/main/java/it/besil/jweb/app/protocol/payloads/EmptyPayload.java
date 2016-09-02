@@ -1,4 +1,4 @@
-package it.besil.jweb.app.payloads;
+package it.besil.jweb.app.protocol.payloads;
 
 
 import spark.Request;

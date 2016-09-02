@@ -1,13 +1,12 @@
 package it.besil.jweb.app.commons.session;
 
 import it.besil.jweb.app.JWebApp;
-import it.besil.jweb.app.answer.ErrorAnswer;
-import it.besil.jweb.app.answer.ReturnCodeAnswer;
-import it.besil.jweb.app.answer.ReturnCodeMessageAnswer;
-import it.besil.jweb.app.answer.SuccessAnswer;
 import it.besil.jweb.app.filter.FilterType;
 import it.besil.jweb.app.filter.JWebFilter;
 import it.besil.jweb.app.filter.JWebFilterHandler;
+import it.besil.jweb.app.protocol.answer.ErrorAnswer;
+import it.besil.jweb.app.protocol.answer.ReturnCodeMessageAnswer;
+import it.besil.jweb.app.protocol.answer.SuccessAnswer;
 import it.besil.jweb.server.conf.JWebConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

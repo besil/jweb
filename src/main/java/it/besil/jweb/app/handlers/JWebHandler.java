@@ -1,16 +1,12 @@
 package it.besil.jweb.app.handlers;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import it.besil.jweb.app.answer.Answer;
-import it.besil.jweb.app.answer.ErrorAnswer;
 import it.besil.jweb.app.commons.session.SessionManager;
 import it.besil.jweb.app.commons.session.SessionPayload;
-import it.besil.jweb.app.payloads.Payload;
+import it.besil.jweb.app.protocol.answer.Answer;
+import it.besil.jweb.app.protocol.answer.ErrorAnswer;
+import it.besil.jweb.app.protocol.payloads.Payload;
 import it.besil.jweb.server.conf.JWebConfiguration;
+import it.besil.jweb.utils.Marshaller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Request;
@@ -25,15 +21,15 @@ import java.lang.reflect.Method;
 public abstract class JWebHandler<V extends Payload, A extends Answer> implements Route {
     private final Class<V> payloadClass;
     private final Class<A> answerClass;
-    private final ObjectMapper mapper;
+    //    private final ObjectMapper mapper;
     private Logger log = LoggerFactory.getLogger(JWebHandler.class);
     private JWebConfiguration jwebconf;
 
     public JWebHandler(Class<V> payloadClass, Class<A> answerClass) {
-        this.mapper = new ObjectMapper();
-        mapper.registerModule(new JavaTimeModule());
-        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+//        this.mapper = new ObjectMapper();
+//        mapper.registerModule(new JavaTimeModule());
+//        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+//        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         this.payloadClass = payloadClass;
         this.answerClass = answerClass;
     }
@@ -44,12 +40,12 @@ public abstract class JWebHandler<V extends Payload, A extends Answer> implement
         Payload p = null;
         try {
             p = payloadClass.newInstance();
-            if (p instanceof SessionPayload)
+            if (p instanceof SessionPayload) {
                 ((SessionPayload) p).setSessionManager(new SessionManager(jwebconf));
+            }
 
             Method payloadInit = payloadClass.getMethod("init", Request.class, Response.class);
             payloadInit.invoke(p, new Object[]{request, response});
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,12 +62,9 @@ public abstract class JWebHandler<V extends Payload, A extends Answer> implement
                 a = new ErrorAnswer(300, "Error while processing payload");
             }
         }
-
         response.type("application/json");
-        return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(a);
-
+        return Marshaller.writer().withDefaultPrettyPrinter().writeValueAsString(a);
     }
-
 
     public Class<A> getAnswerClass() {
         return answerClass;
