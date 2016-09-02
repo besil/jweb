@@ -21,15 +21,10 @@ import java.lang.reflect.Method;
 public abstract class JWebHandler<V extends Payload, A extends Answer> implements Route {
     private final Class<V> payloadClass;
     private final Class<A> answerClass;
-    //    private final ObjectMapper mapper;
     private Logger log = LoggerFactory.getLogger(JWebHandler.class);
     private JWebConfiguration jwebconf;
 
     public JWebHandler(Class<V> payloadClass, Class<A> answerClass) {
-//        this.mapper = new ObjectMapper();
-//        mapper.registerModule(new JavaTimeModule());
-//        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-//        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         this.payloadClass = payloadClass;
         this.answerClass = answerClass;
     }
