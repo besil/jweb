@@ -32,7 +32,7 @@ public class SessionPayload implements Payload {
 
     @Override
     public void init(Request req, Response resp) {
-        Payload.super.init(req, resp);
+//        Payload.super.init(req, resp);
         this.sessionId = sessionManager.getSession(req).getSessionId();
     }
 }

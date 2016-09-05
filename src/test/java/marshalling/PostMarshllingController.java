@@ -2,7 +2,7 @@ package marshalling;
 
 import it.besil.jweb.app.handlers.JWebHandler;
 import it.besil.jweb.app.protocol.answer.Answer;
-import it.besil.jweb.app.protocol.payloads.Payload;
+import it.besil.jweb.app.protocol.payloads.QueryParamPayload;
 import it.besil.jweb.app.resources.HttpMethod;
 import it.besil.jweb.app.resources.JWebController;
 import it.besil.jweb.server.conf.JWebConfiguration;
@@ -37,7 +37,7 @@ public class PostMarshllingController extends JWebController {
         return "/marshall";
     }
 
-    public static class PostPayload implements Payload {
+    public static class PostPayload extends QueryParamPayload {
         String foo;
         int bar;
         List<Integer> bars;

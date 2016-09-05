@@ -8,7 +8,7 @@ import it.besil.jweb.app.JWebApp;
 import it.besil.jweb.app.handlers.JWebHandler;
 import it.besil.jweb.app.protocol.answer.Answer;
 import it.besil.jweb.app.protocol.answer.MessageAnswer;
-import it.besil.jweb.app.protocol.payloads.Payload;
+import it.besil.jweb.app.protocol.payloads.QueryParamPayload;
 import it.besil.jweb.app.resources.HttpMethod;
 import it.besil.jweb.app.resources.JWebController;
 import it.besil.jweb.server.conf.JWebConfiguration;
@@ -143,7 +143,7 @@ public class SimpleApp extends JWebApp {
         }
     }
 
-    public static class SimplePayload implements Payload {
+    public static class SimplePayload extends QueryParamPayload {
         private String simple;
         private int secret;
         private List<String> apps = Arrays.asList("ciao", "mondo");
